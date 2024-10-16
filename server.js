@@ -6,9 +6,9 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Supabase connection string
+// PostgreSQL connection setup using environment variable
 const pool = new Pool({
-  connectionString: 'postgresql://postgres.fmiwvnsngzrpglzemucv:5VmeGIabATGCjpvr@aws-0-us-east-1.pooler.supabase.com:6543/postgres',
+  connectionString: process.env.DATABASE_URL,
 });
 
 app.use(cors());
@@ -156,6 +156,7 @@ app.delete('/api/messages/:id', async (req, res) => {
   }
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
